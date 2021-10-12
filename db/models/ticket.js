@@ -8,7 +8,9 @@ const ticketSchema = new mongoose.Schema({
 })
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
-console.log('Ticket:', Ticket)
 
-module.exports = Ticket;
 
+module.exports = {
+  ticketSchema,
+  Ticket
+}
