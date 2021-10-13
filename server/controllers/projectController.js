@@ -6,11 +6,12 @@ const getProjects = async (req, res) => {
 }
 
 const addProject = async (req, res) => {
-  // const project = new Project({
-  //   name: 'Test Project'
-  // })
-
-  // await project.save();
+  const { name } = req.body
+  const project = new Project({
+    name
+  })
+  await project.save();
+  res.sendStatus(201)
 }
 
 module.exports = {
