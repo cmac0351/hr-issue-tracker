@@ -4,17 +4,19 @@ const Project = require('../../db/models/project.js');
 
 
 const addTicket = async (req, res) => {
-  // const currentProject = await Project.findOne({
-  //   name: 'Test Project'
-  // })
 
-  // await currentProject.tickets.push({
-  //   number: 2,
-  //   description: 'new issue',
-  //   status: 'open',
-  //   notes: '',
-  // })
-  // currentProject.save()
+  const selectedProject = await Project.findById({
+    _id: req.params.projectID
+  })
+  selectedProject.tickets.push({
+    description: req.body.description,
+    status: 'open'
+  })
+
+  await selectedProject.save()
+  res.sendStatus(201)
 }
 
-module.exports = addTicket
+module.exports = {
+  addTicket,
+}
