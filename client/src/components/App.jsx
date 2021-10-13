@@ -5,6 +5,7 @@ import Details from './Details.jsx';
 import axios from 'axios';
 import '../style.scss';
 
+// feature to update ticket status
 
 const App = () => {
   const [projects, setProjects] = useState('');

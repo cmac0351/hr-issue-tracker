@@ -5,6 +5,8 @@ const ticketController = require('../controllers/ticketController')
 
 router.get('/projects/get_projects', projectController.getProjects);
 router.post('/projects/add_project', projectController.addProject);
-router.post('/tickets/add_ticket/:projectID', ticketController.addTicket)
+router.post('/tickets/add_ticket/:projectID', ticketController.addTicket);
+router.put('/tickets/update_status/:ticketID', ticketController.updateTicket)
+router.delete('/tickets/delete/:ticketID', ticketController.deleteTicket)
 
 module.exports = router;

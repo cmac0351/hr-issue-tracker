@@ -6,9 +6,6 @@ const AddNewTicket = ({ getProjectList, selectedProject }) => {
   const [displayNewTicketForm, toggleDispalyNewTicketForm] = useState(false);
   const [ticketDescription, setTicketDescription] = useState('')
 
-  console.log(selectedProject._id)
-  console.log('ticketDescription:', ticketDescription)
-
   const submitTicket = async (projectID, description) => {
     await axios.post(`/tickets/add_ticket/${projectID}`, {
       description
