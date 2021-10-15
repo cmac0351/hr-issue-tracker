@@ -59,6 +59,7 @@ const App = () => {
           toggleActiveProject={toggleActiveProject}
           selectProject={selectProject}
           selectedProjectIndex={selectedProjectIndex}
+          setSelectedProjectIndex={setSelectedProjectIndex}
         />
         <Details
           activeProject={activeProject}

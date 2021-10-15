@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import AddNewTicket from './AddNewTicket.jsx';
 import axios from 'axios';
 
+// create new Component for Ticket Details
+// pass it activeTicket state
+// <TicketDetails activeTicket={activeTicket} />
+
+// find a way to re-open a closed ticket - *low priority*
+
 
 const Details = ({ activeProject, selectedProject, getProjectList, resetSelectedProject, setActiveProject }) => {
+  const [activeTicket, setActiveTicket] = useState({});
+  const [descriptionView, toggleDescriptionView] = useState(false)
 
   let openTickets = '';
   let closedTickets = '';
@@ -32,12 +40,23 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
     getProjectList()
   }
 
+  const handleTicketDescriptionClick = (ticketIndex) => {
+    const { tickets } = selectedProject;
+    setActiveTicket(tickets[ticketIndex])
+    toggleDescriptionView(true)
+  }
+
+  const handleBackToProjectsClick = () => {
+    setActiveTicket({}  )
+    toggleDescriptionView(false)
+  }
+
   let openTicketCount = 0;
   let closedTicketCount = 0;
 
   if (activeProject) {
     const { name, tickets } = selectedProject;
-    openTickets = tickets.map(ticket => {
+    openTickets = tickets.map((ticket, index) => {
       statusDropDown = ticketStatusChoices.map(choice => {
         return <option key={choice} value={choice} >{choice}</option>
       })
@@ -48,7 +67,7 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
           className = 'status status-in-progress'
         }
         return <tr key={ticket._id}>
-          <td>{ticket.description}</td>
+          <td className="ticket-description" onClick={() => handleTicketDescriptionClick(index)}>{ticket.description}</td>
           <td>
             <select
               className={className}
@@ -59,7 +78,7 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
             </select>
           </td>
           <td>
-              <button onClick={() => handleDeleteTicketClick(ticket._id)}>Delete Ticket</button>
+              <button onClick={() => handleDeleteTicketClick(ticket._id)}>delete ticket</button>
           </td>
         </tr>
       }
@@ -86,9 +105,9 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
             <h3>or add a project to get started</h3>
           </div>
         }
-        {activeProject &&
+        {activeProject && !descriptionView &&
         <>
-          <div id="project-title">
+          <div className="project-title">
             <h1>{selectedProject.name.toUpperCase()}</h1>
             <p className="delete-project" onClick={handleDeleteProjectClick}>delete project</p>
           </div>
@@ -123,6 +142,15 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
             </table>
           }
         </>
+        }
+        {activeProject && descriptionView &&
+          <div>
+            <div className="project-title">
+              <h1>{selectedProject.name.toUpperCase()}</h1>
+              <p className="delete-project" onClick={handleDeleteProjectClick}>delete project</p>
+            </div>
+            <p onClick={handleBackToProjectsClick}>back to project view</p>
+          </div>
         }
       </div>
     </div>
