@@ -1,6 +1,7 @@
 import React from 'react';
 
-const ProjectList = ({ projects, toggleActiveProject, selectProject }) => {
+const ProjectList = ({ projects, toggleActiveProject, selectProject, selectedProjectIndex }) => {
+  let activeProjectClassName = ''
 
   const handleProjectClick = (project, index) => {
     toggleActiveProject();
@@ -9,7 +10,8 @@ const ProjectList = ({ projects, toggleActiveProject, selectProject }) => {
 
   const projectList = projects.length ?
   projects.map((project, index) => {
-    return <li onClick={() => handleProjectClick(project, index)} key={project._id}>{project.name}</li>
+    const activeProjectClassName = index === selectedProjectIndex ? 'selected-project' : ''
+    return <li className={activeProjectClassName} onClick={() => handleProjectClick(project, index)} key={project._id}>{project.name}</li>
   }) :
   ''
 

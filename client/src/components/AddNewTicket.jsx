@@ -33,7 +33,7 @@ const AddNewTicket = ({ getProjectList, selectedProject }) => {
         <form className="submit-ticket" onSubmit={handleNewTicketSubmit}>
           <label className="ticket-label">Enter ticket description:</label>
           <div id="new-ticket-input">
-            <input className="ticket-input" onChange={handleTicketFormChange} type="text"></input>
+            <input autoFocus className="ticket-input" onChange={handleTicketFormChange} type="text"></input>
             <input className="submit" type="submit"></input>
             <button className="cancel" type="button" onClick={() => toggleDispalyNewTicketForm(false)}>Cancel</button>
           </div>

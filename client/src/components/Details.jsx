@@ -3,11 +3,16 @@ import AddNewTicket from './AddNewTicket.jsx';
 import axios from 'axios';
 
 
-const Details = ({ activeProject, selectedProject, getProjectList, resetSelectedProject }) => {
+const Details = ({ activeProject, selectedProject, getProjectList, resetSelectedProject, setActiveProject }) => {
+
   let openTickets = '';
   let closedTickets = '';
   let statusDropDown = '';
   const ticketStatusChoices = ['open', 'in progress', 'closed'];
+
+  const openTicketDetails = () => {
+    setActiveProject(!activeProject)
+  }
 
   const handleDeleteProjectClick = async () => {
     await axios.delete(`/projects/delete/${selectedProject._id}`)

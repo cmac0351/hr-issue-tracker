@@ -58,12 +58,14 @@ const App = () => {
           getProjectList={getProjectList}
           toggleActiveProject={toggleActiveProject}
           selectProject={selectProject}
+          selectedProjectIndex={selectedProjectIndex}
         />
         <Details
           activeProject={activeProject}
           selectedProject={selectedProject}
           getProjectList={getProjectList}
           resetSelectedProject={resetSelectedProject}
+          setActiveProject={setActiveProject}
         />
       </div>
     </>

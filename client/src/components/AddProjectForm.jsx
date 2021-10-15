@@ -20,12 +20,12 @@ const AddProjectForm = ({ submitProject, closeDisplayForm }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Enter the Name of the Project:
-          <input value={projectName} onChange={handleChange} type="text"></input>
-        </label>
-        <input type="submit"></input>
-        <button onClick={handleCancel} type="cancel">Cancel</button>
+        <label className="new-project-label">Enter New Project Name:</label>
+        <div>
+          <input className="new-project-text" value={projectName} onChange={handleChange} type="text" autoFocus></input>
+        </div>
+        <input className="button submit-button" type="submit"></input>
+        <button className="button cancel-button" onClick={handleCancel} type="cancel">Cancel</button>
       </form>
     </div>
   )
