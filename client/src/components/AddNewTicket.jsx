@@ -25,18 +25,18 @@ const AddNewTicket = ({ getProjectList, selectedProject }) => {
   }
 
   return (
-    <div>
+    <div id="add-new-ticket">
       {!displayNewTicketForm &&
         <p onClick={() => toggleDispalyNewTicketForm(true)}>+ Add New Ticket</p>
       }
       {displayNewTicketForm &&
-        <form onSubmit={handleNewTicketSubmit}>
-          <label>
-            Enter ticket description
-            <input onChange={handleTicketFormChange} type="text"></input>
-          </label>
-          <input type="submit"></input>
-          <button type="button" onClick={() => toggleDispalyNewTicketForm(false)}>Cancel</button>
+        <form className="submit-ticket" onSubmit={handleNewTicketSubmit}>
+          <label className="ticket-label">Enter ticket description:</label>
+          <div id="new-ticket-input">
+            <input className="ticket-input" onChange={handleTicketFormChange} type="text"></input>
+            <input className="submit" type="submit"></input>
+            <button className="cancel" type="button" onClick={() => toggleDispalyNewTicketForm(false)}>Cancel</button>
+          </div>
         </form>
       }
     </div>

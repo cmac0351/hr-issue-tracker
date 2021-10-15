@@ -2,11 +2,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  :focus {
+    outline: 0;
+  }
 }
 
 html {
   font-size: 16px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 body {
@@ -20,15 +23,141 @@ body {
 
 }
 
-.navigation {
-  background-color: aqua;
-  height: 100vh;
+#title-bar {
+  h1 {
+    padding: 10px;
+    color: #e91823;
+    background-color: rgb(70, 70, 70);
+    border-bottom: 1px black solid;
+  }
 }
 
-.details {
-  background-color: lightcoral;
+#navigation {
+  color: rgb(231, 231, 231);
+  background-color: rgb(100, 100, 100);
   height: 100vh;
+  h3 {
+    margin: 10px;
+  }
+  ul {
+    list-style-type: none;
+    li {
+      padding: 2px;
+      cursor: pointer;
+      margin-left: 15px;
+    }
+  }
+
+  #add-project {
+    cursor: pointer;
+    margin-top: 10px;
+  }
 }
 
+#details {
+  background-color: rgb(241, 241, 241);
+  color:rgb(56, 56, 56);
+  height: 100vh;
+  #details-content {
+    margin-left: 30px;
+    margin-top: 10px;
 
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      margin-top: 2rem;
+    }
+  }
+  table {
+    margin-top: 10px;
+    border-collapse: collapse;
+    border: 1px solid rgb(70, 70, 70);
+
+    th {
+      padding: 1rem 2rem;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: .7rem .7rem;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: white;
+    }
+
+    .status {
+      border: none;
+      appearance: none;
+      padding: .6rem;
+      text-align: center;
+      border-radius: .5rem;
+      cursor: pointer;
+    }
+
+    .status-open {
+      border: 1px solid #577957;
+      background-color: #CAE6CA;
+      color: #577957;
+    }
+
+    .status-in-progress {
+      border: 1px solid #97894f;
+      background-color: #f7e6bc;
+      color: #97894f;
+    }
+
+    button {
+      padding: .6rem;
+      border: none;
+      background-color: transparent;
+      color: blue;
+      cursor: pointer;
+    }
+
+    option {
+      outline: none;
+    }
+  }
+}
+
+#add-new-ticket {
+  margin-top: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+
+  .submit-ticket {
+    #new-ticket-input {
+      margin-top: .6rem;
+    }
+
+    input, button, label {
+      padding: .5rem;
+      margin-right: 10px;
+    }
+
+    button, input {
+      border: 1px solid rgb(70, 70, 70);
+      border-radius: .3rem;
+    }
+
+    .ticket-input {
+      width: 25rem;
+    }
+
+    .submit {
+      border: none;
+      background-color: #2AA243;
+      color: white;
+    }
+
+    .cancel {
+      border: none;
+      background-color: #e91823;
+      color: white;
+    }
+  }
+}
 

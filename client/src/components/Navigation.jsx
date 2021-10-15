@@ -6,7 +6,7 @@ import axios from 'axios';
 const Navigation = ({projects, addProject, getProjectList, toggleActiveProject, selectProject }) => {
 
   return (
-    <div className="navigation">
+    <div id="navigation">
       <h3>Projects</h3>
       <ProjectList projects={projects} toggleActiveProject={toggleActiveProject} selectProject={selectProject}/>
       <AddProject addProject={addProject} getProjectList={getProjectList}/>

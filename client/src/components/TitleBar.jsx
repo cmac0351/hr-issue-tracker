@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TitleBar = () => (
-  <div className="title-bar">
+  <div id="title-bar">
     <h1>Issue Tracker</h1>
   </div>
 )

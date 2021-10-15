@@ -16,7 +16,7 @@ const AddProject = ({ addProject, getProjectList }) => {
   }
 
   return (
-    <div>
+    <div id="add-project">
       {!displayForm &&
         <p onClick={toggleDisplayForm}>+ Add Project</p>
       }
