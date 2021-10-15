@@ -41,6 +41,11 @@ const App = () => {
     setSelectedProjectIndex(index)
   }
 
+  const resetSelectedProject = () => {
+    setActiveProject(false)
+    setSelectedProject({})
+  }
+
 
 
   return (
@@ -58,6 +63,7 @@ const App = () => {
           activeProject={activeProject}
           selectedProject={selectedProject}
           getProjectList={getProjectList}
+          resetSelectedProject={resetSelectedProject}
         />
       </div>
     </>

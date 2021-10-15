@@ -3,11 +3,17 @@ import AddNewTicket from './AddNewTicket.jsx';
 import axios from 'axios';
 
 
-const Details = ({ activeProject, selectedProject, getProjectList }) => {
+const Details = ({ activeProject, selectedProject, getProjectList, resetSelectedProject }) => {
   let openTickets = '';
   let closedTickets = '';
   let statusDropDown = '';
   const ticketStatusChoices = ['open', 'in progress', 'closed'];
+
+  const handleDeleteProjectClick = async () => {
+    await axios.delete(`/projects/delete/${selectedProject._id}`)
+    resetSelectedProject()
+    getProjectList()
+  }
 
   const handleTicketUpdate = async (ticketId, newStatus) => {
     await axios.put(`/tickets/update_status/${ticketId}`, {
@@ -65,7 +71,7 @@ const Details = ({ activeProject, selectedProject, getProjectList }) => {
       }
     })
   }
-  console.lo
+
   return (
     <div id="details">
       <div id="details-content">
@@ -77,7 +83,10 @@ const Details = ({ activeProject, selectedProject, getProjectList }) => {
         }
         {activeProject &&
         <>
-          <h1>{selectedProject.name.toUpperCase()}</h1>
+          <div id="project-title">
+            <h1>{selectedProject.name.toUpperCase()}</h1>
+            <p className="delete-project" onClick={handleDeleteProjectClick}>delete project</p>
+          </div>
           <h2>OPEN TICKETS</h2>
           {openTicketCount > 0 &&
             <table>

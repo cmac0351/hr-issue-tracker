@@ -14,7 +14,18 @@ const addProject = async (req, res) => {
   res.sendStatus(201)
 }
 
+const deleteProject = async (req, res) => {
+  try {
+    const { projectID } = req.params
+    await Project.findByIdAndDelete(projectID)
+    res.sendStatus(200)
+  } catch(err) {
+    res.sendStatus(404)
+  }
+}
+
 module.exports = {
   getProjects,
-  addProject
+  addProject,
+  deleteProject
 }
