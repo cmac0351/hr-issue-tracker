@@ -120,7 +120,7 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
 
           <h2>CLOSED TICKETS</h2>
           {closedTicketCount > 0 &&
-            <table>
+            <table id="closed-tickets-table">
               <thead>
                 <tr>
                   <th>Description</th>
