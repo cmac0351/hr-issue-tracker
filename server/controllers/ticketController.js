@@ -19,7 +19,7 @@ const addTicket = async (req, res) => {
   res.sendStatus(201)
 }
 
-const updateTicket = async (req, res) => {
+const updateTicketStatus = async (req, res) => {
   const { newStatus } = req.body
   const { ticketID } = req.params
 
@@ -30,6 +30,40 @@ const updateTicket = async (req, res) => {
     {
       $set: {
         "tickets.$.status": newStatus
+      }
+    }
+  )
+  res.sendStatus(201)
+}
+
+const updateTicketDescription = async (req, res) => {
+  const { newDescription } = req.body
+  const { ticketID } = req.params
+
+  const currentProject = await Project.updateOne(
+    {
+      "tickets._id": ticketID
+    },
+    {
+      $set: {
+        "tickets.$.description": newDescription
+      }
+    }
+  )
+  res.sendStatus(201)
+}
+
+const updateTicketNotes = async (req, res) => {
+  const { newNotes } = req.body
+  const { ticketID } = req.params
+
+  const currentProject = await Project.updateOne(
+    {
+      "tickets._id": ticketID
+    },
+    {
+      $set: {
+        "tickets.$.notes": newNotes
       }
     }
   )
@@ -55,6 +89,8 @@ const deleteTicket = async (req, res) => {
 
 module.exports = {
   addTicket,
-  updateTicket,
+  updateTicketStatus,
+  updateTicketDescription,
+  updateTicketNotes,
   deleteTicket
 }

@@ -7,7 +7,8 @@ const AddProject = ({ addProject, getProjectList }) => {
 
   const submitProject = async projectName => {
     toggleDisplayForm(false)
-    await axios.post('/projects/add_project', {name: projectName})
+    // await axios.post('/projects/add_project', {name: projectName})
+    await addProject(projectName)
     getProjectList()
   }
 

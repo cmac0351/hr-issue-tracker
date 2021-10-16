@@ -5,13 +5,13 @@ import Details from './Details.jsx';
 import axios from 'axios';
 import '../style.scss';
 
-// feature to update ticket status
-
 const App = () => {
   const [projects, setProjects] = useState('');
   const [activeProject, setActiveProject] = useState(false);
   const [selectedProject, setSelectedProject] = useState({});
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(null);
+  const [descriptionView, toggleDescriptionView] = useState(false);
+
 
   useEffect(async () => {
     getProjectList()
@@ -29,16 +29,16 @@ const App = () => {
     await axios.post('/projects/add_project', {
       name: projectName
     })
-    getProjectList()
+    getProjectList();
   }
 
   const toggleActiveProject = () => {
-    setActiveProject(true)
+    setActiveProject(true);
   }
 
   const selectProject = (clickedProject, index) => {
-    setSelectedProject(clickedProject)
-    setSelectedProjectIndex(index)
+    setSelectedProject(clickedProject);
+    setSelectedProjectIndex(index);
   }
 
   const resetSelectedProject = () => {
@@ -60,6 +60,7 @@ const App = () => {
           selectProject={selectProject}
           selectedProjectIndex={selectedProjectIndex}
           setSelectedProjectIndex={setSelectedProjectIndex}
+          toggleDescriptionView={toggleDescriptionView}
         />
         <Details
           activeProject={activeProject}
@@ -67,6 +68,8 @@ const App = () => {
           getProjectList={getProjectList}
           resetSelectedProject={resetSelectedProject}
           setActiveProject={setActiveProject}
+          descriptionView={descriptionView}
+          toggleDescriptionView={toggleDescriptionView}
         />
       </div>
     </>

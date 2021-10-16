@@ -3,7 +3,7 @@ import ProjectList from './ProjectList.jsx';
 import AddProject from './AddProject.jsx';
 import axios from 'axios';
 
-const Navigation = ({projects, addProject, getProjectList, toggleActiveProject, selectProject, selectedProjectIndex }) => {
+const Navigation = ({projects, addProject, getProjectList, toggleActiveProject, selectProject, selectedProjectIndex, toggleDescriptionView }) => {
 
   return (
     <div id="navigation">
@@ -13,6 +13,7 @@ const Navigation = ({projects, addProject, getProjectList, toggleActiveProject, 
         toggleActiveProject={toggleActiveProject}
         selectProject={selectProject}
         selectedProjectIndex={selectedProjectIndex}
+        toggleDescriptionView={toggleDescriptionView}
       />
       <AddProject
         addProject={addProject}

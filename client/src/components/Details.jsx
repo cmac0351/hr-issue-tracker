@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import AddNewTicket from './AddNewTicket.jsx';
+import TicketDetails from './TicketDetails.jsx';
+import StatusDropDown from './StatusDropDown.jsx';
+import API from './utils.jsx'
 import axios from 'axios';
 
-// create new Component for Ticket Details
-// pass it activeTicket state
-// <TicketDetails activeTicket={activeTicket} />
 
-// find a way to re-open a closed ticket - *low priority*
-
-
-const Details = ({ activeProject, selectedProject, getProjectList, resetSelectedProject, setActiveProject }) => {
+const Details = ({ activeProject, selectedProject, getProjectList, resetSelectedProject, setActiveProject, descriptionView, toggleDescriptionView }) => {
   const [activeTicket, setActiveTicket] = useState({});
-  const [descriptionView, toggleDescriptionView] = useState(false)
 
   let openTickets = '';
   let closedTickets = '';
@@ -19,19 +15,17 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
   const ticketStatusChoices = ['open', 'in progress', 'closed'];
 
   const openTicketDetails = () => {
-    setActiveProject(!activeProject)
+    setActiveProject(!activeProject);
   }
 
   const handleDeleteProjectClick = async () => {
-    await axios.delete(`/projects/delete/${selectedProject._id}`)
-    resetSelectedProject()
-    getProjectList()
+    await axios.delete(`/projects/delete/${selectedProject._id}`);
+    resetSelectedProject();
+    getProjectList();
   }
 
   const handleTicketUpdate = async (ticketId, newStatus) => {
-    await axios.put(`/tickets/update_status/${ticketId}`, {
-      newStatus,
-    })
+    await API.updateTicketStatus(ticketId, newStatus)
     getProjectList()
   }
 
@@ -42,13 +36,13 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
 
   const handleTicketDescriptionClick = (ticketIndex) => {
     const { tickets } = selectedProject;
-    setActiveTicket(tickets[ticketIndex])
-    toggleDescriptionView(true)
+    setActiveTicket(tickets[ticketIndex]);
+    toggleDescriptionView(true);
   }
 
   const handleBackToProjectsClick = () => {
-    setActiveTicket({}  )
-    toggleDescriptionView(false)
+    setActiveTicket({});
+    toggleDescriptionView(false);
   }
 
   let openTicketCount = 0;
@@ -57,9 +51,6 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
   if (activeProject) {
     const { name, tickets } = selectedProject;
     openTickets = tickets.map((ticket, index) => {
-      statusDropDown = ticketStatusChoices.map(choice => {
-        return <option key={choice} value={choice} >{choice}</option>
-      })
       if (ticket.status != 'closed') {
         openTicketCount++
         let className = `status status-${ticket.status}`
@@ -74,7 +65,7 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
               onChange={(e) => handleTicketUpdate(ticket._id, e.target.value)}
               defaultValue={ticket.status}
             >
-              {statusDropDown}
+              <StatusDropDown ticketStatusChoices={ticketStatusChoices}/>
             </select>
           </td>
           <td>
@@ -84,12 +75,12 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
       }
     })
 
-    closedTickets = tickets.map(ticket => {
+    closedTickets = tickets.map((ticket, index) => {
       if (ticket.status === 'closed') {
         closedTicketCount++
-        return <tr>
-          <td>{ticket.description}</td>
-          <td>{ticket.status}</td>
+        return <tr key={ticket._id}>
+          <td className="ticket-description" onClick={() => handleTicketDescriptionClick(index)}>{ticket.description}</td>
+          <td className="status-closed">{ticket.status}</td>
           <td><button onClick={() => handleDeleteTicketClick(ticket._id)}>Delete Ticket</button></td>
         </tr>
       }
@@ -149,7 +140,12 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
               <h1>{selectedProject.name.toUpperCase()}</h1>
               <p className="delete-project" onClick={handleDeleteProjectClick}>delete project</p>
             </div>
-            <p onClick={handleBackToProjectsClick}>back to project view</p>
+            <p className="back-to-project" onClick={handleBackToProjectsClick}>back to project view</p>
+            <TicketDetails
+              activeTicket={activeTicket}
+              ticketStatusChoices={ticketStatusChoices}
+              getProjectList={getProjectList}
+            />
           </div>
         }
       </div>
