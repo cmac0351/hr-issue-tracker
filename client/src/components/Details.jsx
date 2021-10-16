@@ -81,7 +81,7 @@ const Details = ({ activeProject, selectedProject, getProjectList, resetSelected
         return <tr key={ticket._id}>
           <td className="ticket-description" onClick={() => handleTicketDescriptionClick(index)}>{ticket.description}</td>
           <td className="status-closed">{ticket.status}</td>
-          <td><button onClick={() => handleDeleteTicketClick(ticket._id)}>Delete Ticket</button></td>
+          <td><button onClick={() => handleDeleteTicketClick(ticket._id)}>delete Ticket</button></td>
         </tr>
       }
     })
