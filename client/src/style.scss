@@ -1,3 +1,23 @@
+$mainRed: #e91823;
+
+@mixin button-open {
+  border: 1px solid #577957;
+  background-color: #CAE6CA;
+  color: #577957;
+}
+
+@mixin button-in-progress {
+  border: 1px solid #97894f;
+  background-color: #f7e6bc;
+  color: #97894f;
+}
+
+@mixin button-closed {
+  border: 1px solid #682323;
+  background-color: #d16161;
+  color: #682323;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +51,7 @@ pre {
 #title-bar {
   h1 {
     padding: 10px;
-    color: #e91823;
+    color: $mainRed;
     background-color: #414141;
     border-bottom: 1px black solid;
   }
@@ -91,7 +111,7 @@ pre {
     }
 
     .cancel-button {
-      background-color: #e91823;
+      background-color: $mainRed;
       color: white;
     }
   }
@@ -164,24 +184,20 @@ pre {
       text-align: center;
       border-radius: .5rem;
       cursor: pointer;
-    }
-
-    .status-open {
-      border: 1px solid #577957;
-      background-color: #CAE6CA;
-      color: #577957;
-    }
-
-    .status-in-progress {
-      border: 1px solid #97894f;
-      background-color: #f7e6bc;
-      color: #97894f;
-    }
-
-    .status-closed {
-      text-align: center;
-      color: #e91823;
-      font-weight: bold;
+      &-open {
+        @include button-open;
+        // border: 1px solid #577957;
+        // background-color: #CAE6CA;
+        // color: #577957;
+      }
+      &-in-progress {
+        @include button-in-progress;
+      }
+      &-closed {
+        text-align: center;
+        color: $mainRed;
+        font-weight: bold;
+      }
     }
 
     option {
@@ -205,7 +221,7 @@ pre {
   }
 
   .cancel-button {
-    background-color: #e91823;
+    background-color: $mainRed;
     color: white;
     margin: .5rem .7rem 0 0;
     border-radius: .3rem;
@@ -244,7 +260,7 @@ pre {
 
     .cancel {
       border: none;
-      background-color: #e91823;
+      background-color: $mainRed;
       color: white;
     }
   }
@@ -282,21 +298,15 @@ pre {
   }
 
   .open {
-    border: 1px solid #577957;
-    background-color: #CAE6CA;
-    color: #577957;
+    @include button-open;
   }
 
   .in-progress {
-    border: 1px solid #97894f;
-    background-color: #f7e6bc;
-    color: #97894f;
+    @include button-in-progress;
   }
 
   .closed {
-    border: 1px solid #682323;
-    background-color: #d16161;
-    color: #682323;
+    @include button-closed
   }
 }
 
